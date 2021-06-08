@@ -1,25 +1,24 @@
 #!/usr/bin/env python3
+import os
+
 import discord
 from dotenv import load_dotenv
-import os
 
 
 class AutoMod(discord.Client):
     async def send_message_to_mod_channel(self, guild: discord.Guild, text: str):
         if guild.system_channel and guild.system_channel.permissions_for(guild.me).send_messages:
-            print(
-                f"Sending message {text} in {guild.id} to system channel {guild.system_channel.id}")
+            print(f"Sending message {text} in {guild.id} to system channel {guild.system_channel.id}")
             await guild.system_channel.send(text)
         else:
             for channel in guild.text_channels:
                 if channel.permissions_for(guild.me).send_messages:
-                    print(
-                        f"Sending message {text} in {guild.id} to regular channel {channel.id}")
+                    print(f"Sending message {text} in {guild.id} to regular channel {channel.id}")
                     await channel.send(text)
                     break
 
     async def on_ready(self):
-        print(f"Started up in {len(list(client.guilds))} guilds")
+        print(f"Started up in {len(list(self.guilds))} guilds")
 
     async def on_guild_join(self, guild: discord.Guild):
         print(f"Joined guild {guild.id}")
@@ -41,10 +40,8 @@ def main():
     intents = discord.Intents.default()
     intents.members = True
 
-    intents = discord.Intents.default()
-    intents.members = True
-    activity = discord.Activity(
-        name='spam - by zusor.io', type=discord.ActivityType.watching)
+    activity = discord.Activity(name='spam - by zusor.io', type=discord.ActivityType.watching)
+
     client = AutoMod(intents=intents, activity=activity)
 
     client.run(os.getenv('DISCORD_TOKEN'))

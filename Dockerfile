@@ -1,6 +1,7 @@
 FROM python:3.8-alpine
+RUN apk add build-base
 WORKDIR /app
 COPY . .
-RUN apk add build-base
-RUN python3 -m pip install -r requirements.txt
-ENTRYPOINT ["python3", "main.py"]
+RUN pip install --no-cache-dir pipenv && \
+    pipenv install --deploy --clear
+ENTRYPOINT ["pipenv", "run", "python3", "main.py"]
