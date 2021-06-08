@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 "discord.py" = "*"
+python-dotenv = "*"
+typing-extensions = "*"
 
 [requires]
 python_version = "3"
