@@ -5,11 +5,14 @@ import discord
 class AutoMod(discord.Client):
     async def send_message_to_mod_channel(self, guild: discord.Guild, text: str):
         if guild.system_channel and guild.system_channel.permissions_for(guild.me).send_messages:
+            print(f"Sending message {text} in {guild.id} to system channel {guild.system_channel.id}")
             await guild.system_channel.send(text)
         else:
             for channel in guild.text_channels:
                 if channel.permissions_for(guild.me).send_messages:
+                    print(f"Sending message {text} in {guild.id} to regular channel {channel.id}")
                     await channel.send(text)
+                    break
 
     async def on_ready(self):
         print(f"Started up")
