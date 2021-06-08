@@ -12,6 +12,7 @@ class AutoMod(discord.Client):
                     await channel.send(text)
 
     async def on_guild_join(self, guild: discord.Guild):
+        print(f"Joined guild {guild.id}")
         await self.send_message_to_mod_channel(guild, "This bot will automatically ban Honde bots")
 
     async def on_member_join(self, member: discord.Member):
