@@ -32,7 +32,7 @@ class AutoMod(discord.Client):
 
 intents = discord.Intents.default()
 intents.members = True
-activity = discord.Activity(name='for Honde Bots', type=discord.ActivityType.watching)
+activity = discord.Activity(name='spam - by zusor.io', type=discord.ActivityType.watching)
 
 client = AutoMod(intents=intents, activity=activity)
 with open("TOKEN", "r") as f:
