@@ -15,7 +15,7 @@ class AutoMod(discord.Client):
                     break
 
     async def on_ready(self):
-        print(f"Started up")
+        print(f"Started up in {len(list(client.guilds))} guilds")
 
     async def on_guild_join(self, guild: discord.Guild):
         print(f"Joined guild {guild.id}")
@@ -28,6 +28,7 @@ class AutoMod(discord.Client):
                 print(f"Banned {member.id} in {member.guild.id}")
             except discord.Forbidden:
                 await self.send_message_to_mod_channel(member.guild, f"Could not ban {member}, not enough permissions")
+
 
 intents = discord.Intents.default()
 intents.members = True
